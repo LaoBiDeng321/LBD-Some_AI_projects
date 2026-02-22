@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>比特币</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/bitcoin-tracker.css">
+</head>
+<body>
+   
+    <div class="container">
+        <div class="header">
+            <h1>比特币开采进度追踪器</h1>
+            <p>比特币的开采进度和剩余储量</p>
+        </div>
+        
+        <div class="chart-container">
+            <div class="chart-header">
+                <h2>比特币开采进度</h2>
+            </div>
+            <div class="chart-content">
+                <div class="chart-wrapper">
+                    <canvas id="bitcoin-chart"></canvas>
+                </div>
+                <div class="chart-info">
+                    <div class="info-header">
+                        <h3>选中区域信息</h3>
+                    </div>
+                    <div class="info-content" id="selected-segment-info">
+                        <p class="info-placeholder">点击图表中的扇区查看详细信息</p>
+                    </div>
+                </div>
+            </div>
+            <div class="chart-legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);"></div>
+                    <span>第1周期</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: linear-gradient(135deg, #fb923c 0%, #fbbf24 100%);"></div>
+                    <span>第2周期</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: linear-gradient(135deg, #fbbf24 0%, #facc15 100%);"></div>
+                    <span>第3周期</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: linear-gradient(135deg, #facc15 0%, #a3e635 100%);"></div>
+                    <span>第4周期</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: linear-gradient(135deg, #a3e635 0%, #22c55e 100%);"></div>
+                    <span>第5周期</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);"></div>
+                    <span>剩余</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card" data-type="mined">
+                <div class="stat-icon" style="background: rgba(247, 147, 26, 0.1);">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#f97316" viewBox="0 0 16 16">
+                        <path d="M5.5 9.5A.5.5 0 0 1 6 9h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5"/>
+                        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                    </svg>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-label">已开采总量</div>
+                    <div class="stat-value" id="mined-btc">0</div>
+                    <div class="stat-unit">BTC</div>
+                </div>
+            </div>
+            
+            <div class="stat-card" data-type="remaining">
+                <div class="stat-icon" style="background: rgba(59, 130, 246, 0.1);">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#3b82f6" viewBox="0 0 16 16">
+                        <path d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4M3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707M2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10m9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5m.754-4.246a.389.389 0 0 0-.527-.02L9.747 7.957a.5.5 0 0 0-.448.894l2.5 1.5a.5.5 0 0 0 .716-.646l-.754-2.651z"/>
+                        <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0v1z"/>
+                    </svg>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-label">剩余可开采</div>
+                    <div class="stat-value" id="remaining-btc">0</div>
+                    <div class="stat-unit">BTC</div>
+                </div>
+            </div>
+            
+            <div class="stat-card" data-type="completion">
+                <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1);">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#10b981" viewBox="0 0 16 16">
+                        <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0"/>
+                    </svg>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-label">预计开采完成</div>
+                    <div class="stat-value" id="completion-date">--</div>
+                    <div class="stat-unit">年份</div>
+                </div>
+            </div>
+            
+            <div class="stat-card" data-type="rate">
+                <div class="stat-icon" style="background: rgba(139, 92, 246, 0.1);">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#8b5cf6" viewBox="0 0 16 16">
+                        <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/>
+                    </svg>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-label">当前开采率</div>
+                    <div class="stat-value" id="mining-rate">0</div>
+                    <div class="stat-unit">BTC/区块</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="tooltip" id="tooltip"></div>
+    
+    <footer class="footer">
+        <p>© 2026 比特币开采进度追踪器</p>
+    </footer>
+    
+    <script src="js/bitcoin-tracker.js"></script>
+</body>
+</html>

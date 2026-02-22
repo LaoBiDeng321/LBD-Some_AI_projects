@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图像转ICO转换工具</title>
+    <link rel="stylesheet" href="../common.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <a href="../index.html" class="back-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+        </svg>
+        返回导航
+    </a>
+
+    <div class="container">
+        <header class="header">
+            <h1>图像转ICO转换工具</h1>
+            <p>将您的图像转换为符合Windows标准的ICO文件</p>
+        </header>
+
+        <main class="main-content">
+            <!-- 三列式布局容器 -->
+            <div class="three-column-layout">
+                <!-- 左侧：上传区域和尺寸配置 -->
+                <div class="left-column">
+                    <div class="upload-section-small">
+                        <div class="upload-container">
+                            <div id="dropZone" class="drop-zone-small">
+                                <div class="drop-zone-content-small">
+                                    <svg class="icon-small" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="7 10 12 15 17 10"></polyline>
+                                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                                    </svg>
+                                    <p>拖放文件或点击上传</p>
+                                    <p class="supported-formats-small">支持：PNG、JPG、JPEG、WebP（最大10MB）</p>
+                                    <input type="file" id="fileInput" class="file-input" accept=".png,.jpg,.jpeg,.webp">
+                                    <label for="fileInput" class="upload-button-small">选择文件</label>
+                                </div>
+                            </div>
+                            <div id="fileList" class="file-list-small"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- 尺寸配置 -->
+                    <section class="config-section">
+                        <h2>尺寸配置</h2>
+                        <div class="size-options">
+                            <label class="size-option">
+                                <input type="radio" name="iconSize" class="size-radio" value="256" checked>
+                                <span>256×256</span>
+                            </label>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- 中间：预览区域 -->
+                <div class="center-column">
+                    <section class="preview-section">
+                        <div class="preview-container">
+                            <div class="preview-pane original-preview">
+                                <h3>原始图像</h3>
+                                <div class="preview-wrapper">
+                                    <canvas id="originalCanvas" class="preview-canvas"></canvas>
+                                </div>
+                            </div>
+                            <div class="preview-pane ico-preview">
+                                <h3>ICO预览</h3>
+                                <div class="preview-wrapper">
+                                    <canvas id="icoCanvas" class="preview-canvas"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- 右侧：配置和操作区域 -->
+                <div class="right-column">
+                    <div class="filename-config">
+                        <label for="customFilename">自定义文件名：</label>
+                        <input type="text" id="customFilename" placeholder="默认：icon_YYYYMMDD_HHMMSS">
+                    </div>
+
+                    <!-- 进度和操作区域 -->
+                    <section class="progress-action-section">
+                        <!-- 进度区域 -->
+                        <div class="progress-section">
+                            <div id="progressContainer" class="progress-container">
+                                <div id="progressBar" class="progress-bar"></div>
+                                <span id="progressText" class="progress-text">准备就绪</span>
+                            </div>
+                        </div>
+
+                        <!-- 操作按钮区域 -->
+                        <div class="action-buttons">
+                            <button id="convertButton" class="convert-button">开始转换</button>
+                            <button id="downloadButton" class="download-button" disabled>下载ICO文件</button>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>© 2026 图像转ICO转换工具</p>
+        </footer>
+    </div>
+
+    <!-- 错误提示 -->
+    <div id="errorModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>错误提示</h3>
+            <p id="errorMessage"></p>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

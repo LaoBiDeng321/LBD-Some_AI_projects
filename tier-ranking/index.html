@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>排行工具</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <a href="../index.html" class="back-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+        </svg>
+        返回导航
+    </a>
+    <div class="container">
+        <div class="import-section">
+            <label for="fileInput" class="import-btn">批量导入图片</label>
+            <input type="file" id="fileInput" accept="image/*" multiple>
+            <button type="button" id="toggleFileName" class="glass-btn">显示文件名</button>
+            <button type="button" id="resetBtn" class="glass-btn reset-btn">重置</button>
+        </div>
+        
+        <h1 id="mainTitle" contenteditable="true">排行工具</h1>
+
+        <div class="ranking-wrapper">
+            <div class="tier-labels">
+                <div class="tier-label tier-夯" data-tier="夯">夯</div>
+                <div class="tier-label tier-顶级" data-tier="顶级">顶级</div>
+                <div class="tier-label tier-人上人" data-tier="人上人">人上人</div>
+                <div class="tier-label tier-npc" data-tier="npc">NPC</div>
+                <div class="tier-label tier-拉完了" data-tier="拉完了">拉完了</div>
+            </div>
+            
+            <div class="tier-areas">
+                <div class="tier-area" data-tier="夯">
+                    <div class="tier-items" data-tier="夯"></div>
+                </div>
+                <div class="tier-area" data-tier="顶级">
+                    <div class="tier-items" data-tier="顶级"></div>
+                </div>
+                <div class="tier-area" data-tier="人上人">
+                    <div class="tier-items" data-tier="人上人"></div>
+                </div>
+                <div class="tier-area" data-tier="npc">
+                    <div class="tier-items" data-tier="npc"></div>
+                </div>
+                <div class="tier-area" data-tier="拉完了">
+                    <div class="tier-items" data-tier="拉完了"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pool-container">
+            <h2>未分类</h2>
+            <div class="pool-items" id="poolItems"></div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    
+    <footer class="footer">
+        <p>© 2026 排行工具</p>
+    </footer>
+</body>
+</html>
